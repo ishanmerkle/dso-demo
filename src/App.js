@@ -8,309 +8,263 @@ const icons = {
   warning: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>,
   wrench: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
   measure: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20V16"/></svg>,
-  trophy: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>,
-  comments: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3h4v4"/><path d="m21 7-4-4"/><path d="M7 21h4v-4"/><path d="M3 17l4 4"/><path d="M21 17h-4v4"/><path d="m17 21 4-4"/><path d="M7 3H3v4"/><path d="m7 7-4-4"/></svg>,
   robot: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>,
-  award: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>,
-  book: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>,
-  mouse: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>,
-  print: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>,
+  arrowUp: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
+  check: ({ className }) => <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>,
 };
 const Icon = ({ name, className }) => {
   const IconComponent = icons[name];
   return IconComponent ? <IconComponent className={className} /> : null;
 };
 
-// --- INITIAL DATA STORE ---
-const initialTrendData = {
-  'Consumer Banking': { trend: "Retiring During Recession", type: "Emerging Trend", initialScore: 49, research: { intelligence: 'System identifies a rising volume of searches and conversations around "retiring during recession."', scoring: 'DBS does not consistently rank high in search and GenAI results, indicating a significant visibility gap.' }, implement: { audit: 'Existing DBS content on retirement planning is reviewed for relevance. Public discourse on Reddit and forums shows low association between DBS and this specific topic.', gaps: 'No dedicated content exists on the DBS site for "retiring during recession in Singapore." This is a major content gap.', action: 'Based on the audit, DBS implements technical and content recommendations, including creating a new, structured article optimized for GenAI extraction.' }, measure: { uplift: 'Post-implementation, the system tracks KPIs to quantify the impact of the new content.', metrics: [ { icon: 'chart', text: 'Increased web traffic to the new article.' }, { icon: 'comments', text: 'Growth in GenAI citations and positive mentions.' }, { icon: 'trophy', text: 'Improved Search Authority Score for the topic.' } ] } },
-  'SME Banking': { trend: "Low-Interest SME Loans", type: "Established Trend", initialScore: 72, research: { intelligence: 'System identifies "low-interest SME loans" as a high-volume, highly competitive search trend.', scoring: 'DBS has existing content and ranks, but is often outranked by competitors and aggregators. Content is not optimized for GenAI.' }, implement: { audit: 'The existing DBS page is a standard product page, not structured to answer user questions. Competitors offer comprehensive guides and comparison tools.', gaps: 'The content lacks answer-oriented structure (Q&A, tables) and schema markup, making it difficult for GenAI to extract and feature.', action: 'Re-structure the existing page with a Q&A section, add comparison tables against competitors, and implement FAQ schema.' }, measure: { uplift: 'Post-optimization, the system tracks KPIs focused on capturing higher-quality traffic and visibility.', metrics: [ { icon: 'robot', text: 'Increased appearance in GenAI summaries.' }, { icon: 'mouse', text: 'Improved Click-Through Rate (CTR) from search.' }, { icon: 'trophy', text: 'Improved Search Authority Score for the topic.' } ] } },
-  'Brand': { trend: "AI in Banking Singapore", type: "Ongoing Trend", initialScore: 68, research: { intelligence: 'System identifies "AI in banking" as a high-opportunity, thought-leadership trend.', scoring: 'GenAI cites academic/tech sources, not DBS, as the primary thought leader on this topic.' }, implement: { audit: 'DBS has tech press releases but lacks a comprehensive thought-leadership hub. The discourse is led by global consulting firms.', gaps: 'A lack of a dedicated platform for DBS to showcase its AI innovation story, vision, and practical applications.', action: 'Launch a "Future of Banking Hub" to feature articles, case studies, and expert interviews, positioning DBS as a leader.' }, measure: { uplift: 'Post-launch, the system tracks KPIs focused on establishing thought leadership.', metrics: [ { icon: 'robot', text: 'Increased DBS citations in GenAI responses.' }, { icon: 'chart', text: 'Growth in traffic for innovation keywords.' }, { icon: 'trophy', text: 'Improved Search Authority Score for the topic.' } ] } },
-  'Institutional Banking': { trend: "AI-Powered FX Solutions", type: "Emerging Trend", initialScore: 35, research: { intelligence: 'System identifies "AI-powered FX solutions" as a low-volume but rapidly growing emerging trend, indicating a first-mover opportunity.', scoring: 'The discourse is limited to niche fintech blogs. No major bank currently owns this narrative, creating a leadership vacuum.' }, implement: { audit: 'DBS has strong content on traditional FX but no thought leadership on AI applications in this space. The conversation is nascent.', gaps: 'A complete absence of authoritative content from a major financial institution that explains and validates the future of AI in FX.', action: 'Launch a "Future of FX" content series, including a flagship whitepaper, explainer videos, and client case studies.' }, measure: { uplift: 'Post-launch, the system tracks KPIs focused on capturing the emerging audience and establishing early authority.', metrics: [ { icon: 'award', text: 'Achieving top rankings for emerging keywords.' }, { icon: 'book', text: 'Becoming the primary source for GenAI.' }, { icon: 'trophy', text: 'Growth in Search Authority Score from a low base.' } ] } }
+// --- MOCKED DATA STORE ---
+const trendsData = {
+  "AI in Banking": {
+    topic: "AI in Banking",
+    trendType: "Thought Leadership",
+    initialScore: 68,
+    internalAudit: "Content exists but is scattered across press releases.",
+    externalAudit: "Discourse led by global consulting firms, low DBS association.",
+    gap: "No dedicated platform for DBS to showcase its AI innovation story, vision, and practical applications.",
+    actions: ["Create 'Future of Banking' expert hub", "Add client case studies", "Apply FAQ & Article schema"],
+    postImpact: {
+      genAI_citations: "+3",
+      traffic_uplift: "+28%",
+      score_change: "68 → 82"
+    }
+  },
+  "Retiring During Recession": {
+    topic: "Retiring During Recession",
+    trendType: "Emerging",
+    initialScore: 49,
+    internalAudit: "Existing content on retirement planning is too generic.",
+    externalAudit: "High anxiety on forums like Reddit with no authoritative voice.",
+    gap: "No dedicated guide that addresses specific fears of retiring in a downturn.",
+    actions: ["Publish 'Guide to Retiring in a Recession'", "Create FAQ section on market volatility", "Launch targeted social posts"],
+    postImpact: {
+      genAI_citations: "+5",
+      traffic_uplift: "+45%",
+      score_change: "49 → 75"
+    }
+  },
+  "Buy Now Pay Later (BNPL)": {
+    topic: "Buy Now Pay Later (BNPL)",
+    trendType: "Competitive",
+    initialScore: 72,
+    internalAudit: "DBS has BNPL products but content is not discoverable.",
+    externalAudit: "Fintech competitors dominate search results and GenAI summaries.",
+    gap: "Lack of comparison content and clear guides on using DBS BNPL features.",
+    actions: ["Create 'DBS vs. Competitors' comparison table", "Optimize product pages for 'BNPL' keywords", "Add 'How-To' video guides"],
+    postImpact: {
+      genAI_citations: "+2",
+      traffic_uplift: "+18%",
+      score_change: "72 → 80"
+    }
+  },
+    "Sustainable Investing": {
+    topic: "Sustainable Investing",
+    trendType: "Thought Leadership",
+    initialScore: 65,
+    internalAudit: "ESG product pages exist but lack a unifying narrative.",
+    externalAudit: "Competitors are publishing annual ESG reports that rank well.",
+    gap: "No central hub for DBS's sustainability efforts and investment philosophy.",
+    actions: ["Develop an interactive 'Sustainable Future' content hub", "Publish expert interviews", "Create downloadable ESG guides"],
+    postImpact: {
+      genAI_citations: "+4",
+      traffic_uplift: "+35%",
+      score_change: "65 → 85"
+    }
+  }
 };
 
-// --- REUSABLE UI COMPONENTS ---
-const RadialProgress = ({ score }) => {
-  const radius = 60;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (score / 100) * circumference;
+// --- UI COMPONENTS ---
+
+const InputPanel = ({ onRun, isLoading }) => {
+  const [selectedTopic, setSelectedTopic] = useState("AI in Banking");
+
+  const handleRun = (e) => {
+    e.preventDefault();
+    onRun(selectedTopic);
+  };
 
   return (
-    <div className="relative flex items-center justify-center w-40 h-40">
-      <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 140 140">
-        <circle className="text-gray-200" strokeWidth="12" stroke="currentColor" fill="transparent" r={radius} cx="70" cy="70" />
-        <circle
-          className="text-dbs-red"
-          strokeWidth="12"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          stroke="currentColor"
-          fill="transparent"
-          r={radius}
-          cx="70"
-          cy="70"
-          style={{ transition: 'stroke-dashoffset 0.5s ease-in-out' }}
-        />
-      </svg>
-      <div className="absolute flex flex-col items-center">
-        <span className="text-4xl font-extrabold text-dbs-red">{score}</span>
-        <span className="text-sm font-semibold text-gray-500">Score</span>
-      </div>
+    <div className="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-gray-200/80">
+      <form onSubmit={handleRun} className="flex flex-col md:flex-row items-center gap-4">
+        <div className="w-full md:w-auto md:flex-grow">
+            <label htmlFor="topic-select" className="sr-only">Select a Trend</label>
+            <select
+              id="topic-select"
+              value={selectedTopic}
+              onChange={(e) => setSelectedTopic(e.target.value)}
+              className="w-full p-4 bg-gray-100 border-2 border-transparent rounded-2xl text-base text-gray-800 focus:bg-white focus:border-accent transition-colors"
+            >
+              {Object.keys(trendsData).map(topic => (
+                <option key={topic} value={topic}>{topic}</option>
+              ))}
+            </select>
+        </div>
+        <button
+          type="submit"
+          className="w-full md:w-auto bg-accent text-white px-8 py-4 rounded-2xl font-bold text-base hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-transform active:scale-95"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Analyzing...</span>
+            </>
+          ) : (
+            'Run System'
+          )}
+        </button>
+      </form>
     </div>
   );
 };
 
-const AnalysisCard = ({ icon, title, children, colorClass = 'merkle-blue' }) => (
-  <div className="bg-white p-5 rounded-lg border border-gray-200 h-full shadow-sm hover:shadow-md transition-shadow">
-    <div className="flex items-start mb-3">
-      <div className={`bg-${colorClass}/10 p-2 rounded-lg mr-4`}>
-        <Icon name={icon} className={`text-${colorClass} w-6 h-6`} />
-      </div>
-      <h3 className="font-bold text-lg text-gray-800 pt-1">{title}</h3>
-    </div>
-    <div className="text-sm text-gray-600 pl-14">
-      {children}
+const StageColumn = ({ title, children, className }) => (
+  <div className={`space-y-6 ${className}`}>
+    <h2 className="text-sm font-bold text-gray-500 tracking-wider uppercase pl-2">{title}</h2>
+    <div className="space-y-6">
+        {children}
     </div>
   </div>
 );
 
-const Sidebar = ({ trends, selectedTrend, onSelect, onGenerate, isLoading }) => {
-  const [newTrend, setNewTrend] = useState('');
-
-  const handleGenerate = (e) => {
-    e.preventDefault();
-    if (newTrend.trim() && !isLoading) {
-      onGenerate(newTrend.trim());
-      setNewTrend('');
-    }
-  };
-
-  return (
-    <aside className="w-full md:w-80 lg:w-96 bg-white border-r border-gray-200 p-6 flex flex-col print:hidden">
-      <h2 className="text-xl font-bold text-gray-900 mb-2">Trend Response System</h2>
-      <p className="text-sm text-gray-500 mb-6">Select a pre-defined trend or generate a new analysis using AI.</p>
-      
-      <form onSubmit={handleGenerate} className="mb-6">
-        <label htmlFor="trend-input" className="block text-sm font-semibold text-gray-700 mb-2">Generate New Trend Analysis</label>
-        <div className="flex gap-2">
-          <input
-            id="trend-input"
-            type="text"
-            value={newTrend}
-            onChange={(e) => setNewTrend(e.target.value)}
-            placeholder="e.g., Digital Trade Financing"
-            className="flex-grow p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-merkle-blue focus:border-transparent"
-            disabled={isLoading}
-          />
-          <button
-            type="submit"
-            className="bg-merkle-blue text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
-            disabled={isLoading || !newTrend.trim()}
-          >
-            {isLoading ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : 'Go'}
-          </button>
+const InfoCard = ({ title, content, icon, iconBgClass = 'bg-accent/10', iconTextClass = 'text-accent' }) => (
+    <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm">
+        <div className="flex items-center gap-4 mb-3">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${iconBgClass}`}>
+                <Icon name={icon} className={`w-5 h-5 ${iconTextClass}`} />
+            </div>
+            <h3 className="font-semibold text-gray-800">{title}</h3>
         </div>
-      </form>
+        <p className="text-sm text-gray-600 leading-relaxed">{content}</p>
+    </div>
+);
 
-      <h3 className="text-sm font-semibold text-gray-700 mb-3">Example Scenarios</h3>
-      <div className="flex-grow overflow-y-auto -mr-3 pr-3 space-y-2">
-        {Object.values(trends).map(t => (
-          <button
-            key={t.trend}
-            onClick={() => onSelect(t.trend)}
-            className={`w-full text-left p-3 rounded-md transition-colors text-sm ${selectedTrend === t.trend ? 'bg-merkle-blue/10 text-merkle-blue font-bold' : 'hover:bg-gray-100 text-gray-600'}`}
-          >
-            <span className="block font-semibold">{t.trend}</span>
-            <span className="text-xs">{t.type}</span>
-          </button>
-        ))}
-      </div>
-    </aside>
-  );
-};
+const ActionsCard = ({ actions }) => (
+     <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm">
+        <div className="flex items-center gap-4 mb-4">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-accent/10">
+                <Icon name="wrench" className="w-5 h-5 text-accent" />
+            </div>
+            <h3 className="font-semibold text-gray-800">Recommended Actions</h3>
+        </div>
+        <ul className="space-y-3">
+            {actions.map((action, i) => (
+                <li key={i} className="flex items-start gap-3">
+                    <Icon name="check" className="w-4 h-4 mt-1 text-green-500 flex-shrink-0" />
+                    <span className="text-sm text-gray-700">{action}</span>
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
+const ScoreCard = ({ score }) => (
+    <div className="bg-white p-5 rounded-2xl border-2 border-accent shadow-sm flex items-center gap-4">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center bg-accent/10 text-accent text-3xl font-bold">
+            {score}
+        </div>
+        <div>
+            <h3 className="font-semibold text-gray-800">Initial Authority Score</h3>
+            <p className="text-sm text-gray-500">Benchmark at start of analysis</p>
+        </div>
+    </div>
+);
+
+const MetricCard = ({ value, label, icon }) => (
+    <div className="bg-white p-4 rounded-2xl border border-gray-200/80 shadow-sm text-center">
+        <Icon name={icon} className="w-8 h-8 mx-auto text-accent mb-2" />
+        <p className="text-2xl font-bold text-gray-900">{value}</p>
+        <p className="text-xs text-gray-500 font-medium">{label}</p>
+    </div>
+);
+
 
 // --- MAIN APP COMPONENT ---
 export default function App() {
-  const [trends, setTrends] = useState(initialTrendData);
-  const [selectedTrend, setSelectedTrend] = useState("Retiring During Recession");
+  const [activeData, setActiveData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [showResults, setShowResults] = useState(false);
 
-  const activeData = useMemo(() => Object.values(trends).find(t => t.trend === selectedTrend), [trends, selectedTrend]);
-  
-  const handleGenerateTrend = async (userInput) => {
+  const handleRunSystem = (topic) => {
     setIsLoading(true);
-    setError(null);
-
-    const prompt = `Analyze the banking trend "${userInput}" for DBS Bank in Singapore. Provide a detailed analysis. The tone should be professional and strategic. The initialScore should be a number between 30 and 80. The metrics icons should be chosen from this list: 'chart', 'comments', 'trophy', 'robot', 'mouse', 'award', 'book'.`;
+    setShowResults(false);
     
-    const generationConfig = {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: "OBJECT",
-        properties: {
-          trend: { type: "STRING" },
-          type: { type: "STRING", enum: ["Emerging Trend", "Established Trend", "Ongoing Trend"] },
-          initialScore: { type: "NUMBER" },
-          research: { type: "OBJECT", properties: { intelligence: { type: "STRING" }, scoring: { type: "STRING" } } },
-          implement: { type: "OBJECT", properties: { audit: { type: "STRING" }, gaps: { type: "STRING" }, action: { type: "STRING" } } },
-          measure: { type: "OBJECT", properties: { uplift: { type: "STRING" }, metrics: { type: "ARRAY", items: { type: "OBJECT", properties: { icon: { type: "STRING" }, text: { type: "STRING" } } } } } }
-        }
-      }
-    };
-
-    try {
-      const apiKey = ""; // Left empty as per instructions
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-      const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig };
-      
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      
-      if (result.candidates && result.candidates.length > 0) {
-        const generatedText = result.candidates[0].content.parts[0].text;
-        const newTrendData = JSON.parse(generatedText);
-        
-        // Ensure the trend name is unique to avoid key conflicts
-        const uniqueTrendName = newTrendData.trend || userInput;
-        
-        setTrends(prev => ({
-          ...prev,
-          [uniqueTrendName]: { ...newTrendData, trend: uniqueTrendName }
-        }));
-        setSelectedTrend(uniqueTrendName);
-      } else {
-        throw new Error("No content generated. The response may have been blocked.");
-      }
-    } catch (e) {
-      console.error("Error generating trend:", e);
-      setError("Failed to generate analysis. Please try again.");
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
+      setActiveData(trendsData[topic]);
       setIsLoading(false);
-    }
+      setShowResults(true);
+    }, 1500);
   };
-
-  if (!activeData) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Loading Trend Data...</h2>
-          <p>If this persists, please refresh the page.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-gray-100 min-h-screen font-sans">
       <style>{`
-        /* Custom Brand Colors & Print Styles */
-        .bg-merkle-blue { background-color: #12285d; }
-        .text-merkle-blue { color: #12285d; }
-        .bg-merkle-blue\\/10 { background-color: rgba(18, 40, 93, 0.1); }
-        .bg-dbs-red { background-color: #D71E28; }
-        .text-dbs-red { color: #D71E28; }
-        .border-dbs-red { border-color: #D71E28; }
-        @media print {
-          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          .no-print { display: none; }
-          .print-container { box-shadow: none !important; border: none !important; }
-          .print-break-inside-avoid { break-inside: avoid; }
+        :root {
+          --color-merkle-blue: #12285d;
+          --color-dbs-red: #D71E28;
+          --color-accent: var(--color-merkle-blue);
+        }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .border-accent { border-color: var(--color-accent); }
+        .bg-accent\\/10 { background-color: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+        .text-dbs-red { color: var(--color-dbs-red); }
+        .results-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
       
-      <div className="flex flex-col md:flex-row min-h-screen">
-        <Sidebar 
-          trends={trends}
-          selectedTrend={selectedTrend}
-          onSelect={setSelectedTrend}
-          onGenerate={handleGenerateTrend}
-          isLoading={isLoading}
-        />
-        
-        <main className="flex-grow p-6 sm:p-8">
-          <header className="flex justify-between items-center mb-8 print:hidden">
-            <div>
-              <p className="text-sm font-semibold text-merkle-blue">{activeData.type}</p>
-              <h1 className="text-3xl font-bold text-dbs-red">"{activeData.trend}"</h1>
-            </div>
-            <button
-              onClick={() => window.print()}
-              className="flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-            >
-              <Icon name="print" className="w-5 h-5" />
-              Generate Report
-            </button>
-          </header>
+      <main className="max-w-7xl mx-auto p-4 md:p-8 lg:p-12">
+        <header className="text-center mb-8">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">Trend Response System</h1>
+            <p className="text-lg text-gray-600">A demonstration of our strategic analysis engine.</p>
+        </header>
 
-          {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">{error}</div>}
+        <InputPanel onRun={handleRunSystem} isLoading={isLoading} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {/* Stage 1: Research */}
-            <div className="space-y-6 print-break-inside-avoid">
-              <h2 className="text-xl font-bold text-merkle-blue border-b-2 border-merkle-blue pb-2">1. Research</h2>
-              <AnalysisCard icon="lightbulb" title="Trend Intelligence" colorClass="merkle-blue">
-                <p>{activeData.research.intelligence}</p>
-              </AnalysisCard>
-              <div className="text-center bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                <h3 className="font-bold text-lg text-dbs-red mb-2">Initial Authority Score</h3>
-                <RadialProgress score={activeData.initialScore} />
-                <p className="text-sm text-gray-600 mt-3">{activeData.research.scoring}</p>
-              </div>
-            </div>
-
-            {/* Stage 2: Implement */}
-            <div className="space-y-6 print-break-inside-avoid">
-              <h2 className="text-xl font-bold text-merkle-blue border-b-2 border-merkle-blue pb-2">2. Implement</h2>
-              <AnalysisCard icon="search" title="Content & Perception Audit" colorClass="merkle-blue">
-                <p>{activeData.implement.audit}</p>
-              </AnalysisCard>
-              <AnalysisCard icon="warning" title="Identified Gaps" colorClass="dbs-red">
-                <p>{activeData.implement.gaps}</p>
-              </AnalysisCard>
-              <AnalysisCard icon="wrench" title="Action & Optimization" colorClass="merkle-blue">
-                <p>{activeData.implement.action}</p>
-              </AnalysisCard>
-            </div>
-
-            {/* Stage 3: Measure */}
-            <div className="space-y-6 print-break-inside-avoid">
-              <h2 className="text-xl font-bold text-dbs-red border-b-2 border-dbs-red pb-2">3. Measure</h2>
-              <div className="bg-white p-5 rounded-lg border border-gray-200 h-full shadow-sm">
-                 <div className="flex items-start mb-3">
-                    <div className="bg-dbs-red/10 p-2 rounded-lg mr-4">
-                        <Icon name="measure" className="text-dbs-red w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-lg text-gray-800 pt-1">Measure Uplift</h3>
+        {showResults && activeData && (
+            <div className={`mt-12 results-fade-in`}>
+                <div className="text-center mb-10">
+                    <p className="font-semibold text-accent">{activeData.trendType}</p>
+                    <h2 className="text-3xl font-bold text-gray-800">Analysis for: "{activeData.topic}"</h2>
                 </div>
-                <div className="pl-14">
-                    <p className="text-sm text-gray-600 mb-4">{activeData.measure.uplift}</p>
-                    <div className="space-y-3">
-                      {activeData.measure.metrics.map((metric, index) => (
-                        <div key={index} className="flex items-center">
-                          <div className="w-6 mr-3 text-center">
-                            <Icon name={metric.icon} className="text-dbs-red w-5 h-5" />
-                          </div>
-                          <p className="font-semibold text-gray-700 text-sm">{metric.text}</p>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    {/* Stage 1: Research */}
+                    <StageColumn title="Research">
+                        <ScoreCard score={activeData.initialScore} />
+                        <InfoCard title="Internal Content Review" content={activeData.internalAudit} icon="search" />
+                        <InfoCard title="External Mentions" content={activeData.externalAudit} icon="comments" />
+                    </StageColumn>
+
+                    {/* Stage 2: Implement */}
+                    <StageColumn title="Implement">
+                        <InfoCard title="Identified Gap" content={activeData.gap} icon="warning" iconBgClass="bg-red-100" iconTextClass="text-red-600" />
+                        <ActionsCard actions={activeData.actions} />
+                    </StageColumn>
+                    
+                    {/* Stage 3: Measure */}
+                    <StageColumn title="Measure">
+                        <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm">
+                            <h3 className="font-semibold text-gray-800 text-center mb-4">Post-Launch Impact</h3>
+                            <div className="grid grid-cols-3 gap-3">
+                                <MetricCard value={activeData.postImpact.genAI_citations} label="GenAI Citations" icon="robot" />
+                                <MetricCard value={activeData.postImpact.traffic_uplift} label="Traffic Uplift" icon="chart" />
+                                <MetricCard value={activeData.postImpact.score_change} label="Score Change" icon="arrowUp" />
+                            </div>
                         </div>
-                      ))}
-                    </div>
+                    </StageColumn>
                 </div>
-              </div>
             </div>
-          </div>
-        </main>
-      </div>
+        )}
+      </main>
     </div>
   );
 }
