@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 // --- ICONS (as components for easy use) ---
 const icons = {
@@ -31,45 +31,45 @@ const initialTrendData = {
 
 // --- REUSABLE UI COMPONENTS ---
 const RadialProgress = ({ score }) => {
-  const radius = 56;
+  const radius = 60;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="relative flex items-center justify-center w-36 h-36">
-      <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 120 120">
-        <circle className="text-gray-200" strokeWidth="10" stroke="currentColor" fill="transparent" r={radius} cx="60" cy="60" />
+    <div className="relative flex items-center justify-center w-40 h-40">
+      <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 140 140">
+        <circle className="text-gray-200" strokeWidth="12" stroke="currentColor" fill="transparent" r={radius} cx="70" cy="70" />
         <circle
           className="text-dbs-red"
-          strokeWidth="10"
+          strokeWidth="12"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
           stroke="currentColor"
           fill="transparent"
           r={radius}
-          cx="60"
-          cy="60"
+          cx="70"
+          cy="70"
           style={{ transition: 'stroke-dashoffset 0.5s ease-in-out' }}
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className="text-4xl font-bold text-gray-800">{score}</span>
-        <span className="text-xs font-medium text-gray-500">SCORE</span>
+        <span className="text-4xl font-extrabold text-dbs-red">{score}</span>
+        <span className="text-sm font-semibold text-gray-500">Score</span>
       </div>
     </div>
   );
 };
 
 const AnalysisCard = ({ icon, title, children, colorClass = 'merkle-blue' }) => (
-  <div className="bg-white p-6 rounded-2xl border border-gray-200/80 h-full shadow-sm hover:shadow-lg transition-shadow duration-300">
-    <div className="flex items-center mb-4">
-      <div className={`bg-accent/10 p-2.5 rounded-full mr-4`}>
-        <Icon name={icon} className={`text-accent w-6 h-6`} />
+  <div className="bg-white p-5 rounded-lg border border-gray-200 h-full shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex items-start mb-3">
+      <div className={`bg-${colorClass}/10 p-2 rounded-lg mr-4`}>
+        <Icon name={icon} className={`text-${colorClass} w-6 h-6`} />
       </div>
-      <h3 className="font-semibold text-base text-gray-900">{title}</h3>
+      <h3 className="font-bold text-lg text-gray-800 pt-1">{title}</h3>
     </div>
-    <div className="text-sm text-gray-600 leading-relaxed">
+    <div className="text-sm text-gray-600 pl-14">
       {children}
     </div>
   </div>
@@ -87,14 +87,12 @@ const Sidebar = ({ trends, selectedTrend, onSelect, onGenerate, isLoading }) => 
   };
 
   return (
-    <aside className="w-full md:w-80 lg:w-96 bg-gray-100 border-r border-gray-200/80 p-6 flex flex-col print:hidden">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 bg-merkle-blue rounded-full"></div>
-        <h2 className="text-lg font-bold text-gray-900">Trend Response System</h2>
-      </div>
+    <aside className="w-full md:w-80 lg:w-96 bg-white border-r border-gray-200 p-6 flex flex-col print:hidden">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">Trend Response System</h2>
+      <p className="text-sm text-gray-500 mb-6">Select a pre-defined trend or generate a new analysis using AI.</p>
       
-      <form onSubmit={handleGenerate} className="mb-8">
-        <label htmlFor="trend-input" className="block text-sm font-semibold text-gray-600 mb-2">Generate New Trend Analysis</p>
+      <form onSubmit={handleGenerate} className="mb-6">
+        <label htmlFor="trend-input" className="block text-sm font-semibold text-gray-700 mb-2">Generate New Trend Analysis</label>
         <div className="flex gap-2">
           <input
             id="trend-input"
@@ -102,29 +100,29 @@ const Sidebar = ({ trends, selectedTrend, onSelect, onGenerate, isLoading }) => 
             value={newTrend}
             onChange={(e) => setNewTrend(e.target.value)}
             placeholder="e.g., Digital Trade Financing"
-            className="flex-grow p-3 bg-white border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-accent focus:border-transparent"
+            className="flex-grow p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-merkle-blue focus:border-transparent"
             disabled={isLoading}
           />
           <button
             type="submit"
-            className="bg-accent text-white w-12 h-12 rounded-full font-semibold hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center flex-shrink-0"
+            className="bg-merkle-blue text-white px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
             disabled={isLoading || !newTrend.trim()}
           >
-            {isLoading ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>}
+            {isLoading ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : 'Go'}
           </button>
         </div>
       </form>
 
-      <h3 className="text-sm font-semibold text-gray-600 mb-3 px-3">Example Scenarios</h3>
-      <div className="flex-grow overflow-y-auto -mr-3 pr-3 space-y-1">
+      <h3 className="text-sm font-semibold text-gray-700 mb-3">Example Scenarios</h3>
+      <div className="flex-grow overflow-y-auto -mr-3 pr-3 space-y-2">
         {Object.values(trends).map(t => (
           <button
             key={t.trend}
             onClick={() => onSelect(t.trend)}
-            className={`w-full text-left p-3 rounded-xl transition-all duration-200 text-sm ${selectedTrend === t.trend ? 'bg-accent/10 text-accent' : 'hover:bg-gray-200/60 text-gray-600'}`}
+            className={`w-full text-left p-3 rounded-md transition-colors text-sm ${selectedTrend === t.trend ? 'bg-merkle-blue/10 text-merkle-blue font-bold' : 'hover:bg-gray-100 text-gray-600'}`}
           >
-            <span className="block font-semibold text-gray-800">{t.trend}</span>
-            <span className="text-xs text-gray-500">{t.type}</span>
+            <span className="block font-semibold">{t.trend}</span>
+            <span className="text-xs">{t.type}</span>
           </button>
         ))}
       </div>
@@ -173,15 +171,23 @@ export default function App() {
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.statusText}`);
+      }
+
       const result = await response.json();
       
       if (result.candidates && result.candidates.length > 0) {
         const generatedText = result.candidates[0].content.parts[0].text;
         const newTrendData = JSON.parse(generatedText);
+        
+        // Ensure the trend name is unique to avoid key conflicts
         const uniqueTrendName = newTrendData.trend || userInput;
         
-        setTrends(prev => ({ ...prev, [uniqueTrendName]: { ...newTrendData, trend: uniqueTrendName } }));
+        setTrends(prev => ({
+          ...prev,
+          [uniqueTrendName]: { ...newTrendData, trend: uniqueTrendName }
+        }));
         setSelectedTrend(uniqueTrendName);
       } else {
         throw new Error("No content generated. The response may have been blocked.");
@@ -208,20 +214,16 @@ export default function App() {
   return (
     <div className="bg-gray-100 min-h-screen font-sans">
       <style>{`
-        :root {
-          --color-merkle-blue: #12285d;
-          --color-dbs-red: #D71E28;
-          --color-accent: var(--color-merkle-blue);
-        }
-        .bg-accent { background-color: var(--color-accent); }
-        .text-accent { color: var(--color-accent); }
-        .bg-accent\\/10 { background-color: color-mix(in srgb, var(--color-accent) 10%, transparent); }
-        .ring-accent { ring-color: var(--color-accent); }
-        .text-dbs-red { color: var(--color-dbs-red); }
-        
+        /* Custom Brand Colors & Print Styles */
+        .bg-merkle-blue { background-color: #12285d; }
+        .text-merkle-blue { color: #12285d; }
+        .bg-merkle-blue\\/10 { background-color: rgba(18, 40, 93, 0.1); }
+        .bg-dbs-red { background-color: #D71E28; }
+        .text-dbs-red { color: #D71E28; }
+        .border-dbs-red { border-color: #D71E28; }
         @media print {
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          .print-hidden { display: none; }
+          .no-print { display: none; }
           .print-container { box-shadow: none !important; border: none !important; }
           .print-break-inside-avoid { break-inside: avoid; }
         }
@@ -236,70 +238,70 @@ export default function App() {
           isLoading={isLoading}
         />
         
-        <main className="flex-grow p-6 sm:p-10">
-          <header className="flex flex-wrap justify-between items-center gap-4 mb-10 print-hidden">
+        <main className="flex-grow p-6 sm:p-8">
+          <header className="flex justify-between items-center mb-8 print:hidden">
             <div>
-              <p className="text-sm font-semibold text-accent">{activeData.type}</p>
-              <h1 className="text-3xl font-bold text-gray-900">"{activeData.trend}"</h1>
+              <p className="text-sm font-semibold text-merkle-blue">{activeData.type}</p>
+              <h1 className="text-3xl font-bold text-dbs-red">"{activeData.trend}"</h1>
             </div>
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-full font-semibold hover:bg-gray-200/60 transition-colors"
+              className="flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               <Icon name="print" className="w-5 h-5" />
               Generate Report
             </button>
           </header>
 
-          {error && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">{error}</div>}
+          {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">{error}</div>}
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             {/* Stage 1: Research */}
-            <div className="space-y-8 print-break-inside-avoid">
-              <h2 className="text-lg font-bold text-gray-500 tracking-wider uppercase">1. Research</h2>
-              <AnalysisCard icon="lightbulb" title="Trend Intelligence" colorClass="accent">
+            <div className="space-y-6 print-break-inside-avoid">
+              <h2 className="text-xl font-bold text-merkle-blue border-b-2 border-merkle-blue pb-2">1. Research</h2>
+              <AnalysisCard icon="lightbulb" title="Trend Intelligence" colorClass="merkle-blue">
                 <p>{activeData.research.intelligence}</p>
               </AnalysisCard>
-              <div className="text-center bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm">
-                <h3 className="font-semibold text-base text-gray-900 mb-4">Initial Authority Score</h3>
+              <div className="text-center bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                <h3 className="font-bold text-lg text-dbs-red mb-2">Initial Authority Score</h3>
                 <RadialProgress score={activeData.initialScore} />
-                <p className="text-sm text-gray-600 mt-4">{activeData.research.scoring}</p>
+                <p className="text-sm text-gray-600 mt-3">{activeData.research.scoring}</p>
               </div>
             </div>
 
             {/* Stage 2: Implement */}
-            <div className="space-y-8 print-break-inside-avoid">
-              <h2 className="text-lg font-bold text-gray-500 tracking-wider uppercase">2. Implement</h2>
-              <AnalysisCard icon="search" title="Content & Perception Audit" colorClass="accent">
+            <div className="space-y-6 print-break-inside-avoid">
+              <h2 className="text-xl font-bold text-merkle-blue border-b-2 border-merkle-blue pb-2">2. Implement</h2>
+              <AnalysisCard icon="search" title="Content & Perception Audit" colorClass="merkle-blue">
                 <p>{activeData.implement.audit}</p>
               </AnalysisCard>
               <AnalysisCard icon="warning" title="Identified Gaps" colorClass="dbs-red">
                 <p>{activeData.implement.gaps}</p>
               </AnalysisCard>
-              <AnalysisCard icon="wrench" title="Action & Optimization" colorClass="accent">
+              <AnalysisCard icon="wrench" title="Action & Optimization" colorClass="merkle-blue">
                 <p>{activeData.implement.action}</p>
-              </An>
+              </AnalysisCard>
             </div>
 
             {/* Stage 3: Measure */}
-            <div className="space-y-8 print-break-inside-avoid">
-              <h2 className="text-lg font-bold text-gray-500 tracking-wider uppercase">3. Measure</h2>
-              <div className="bg-white p-6 rounded-2xl border border-gray-200/80 h-full shadow-sm">
-                 <div className="flex items-center mb-4">
-                    <div className="bg-accent/10 p-2.5 rounded-full mr-4">
-                        <Icon name="measure" className="text-accent w-6 h-6" />
+            <div className="space-y-6 print-break-inside-avoid">
+              <h2 className="text-xl font-bold text-dbs-red border-b-2 border-dbs-red pb-2">3. Measure</h2>
+              <div className="bg-white p-5 rounded-lg border border-gray-200 h-full shadow-sm">
+                 <div className="flex items-start mb-3">
+                    <div className="bg-dbs-red/10 p-2 rounded-lg mr-4">
+                        <Icon name="measure" className="text-dbs-red w-6 h-6" />
                     </div>
-                    <h3 className="font-semibold text-base text-gray-900">Measure Uplift</h3>
+                    <h3 className="font-bold text-lg text-gray-800 pt-1">Measure Uplift</h3>
                 </div>
-                <div>
-                    <p className="text-sm text-gray-600 mb-6">{activeData.measure.uplift}</p>
-                    <div className="space-y-4">
+                <div className="pl-14">
+                    <p className="text-sm text-gray-600 mb-4">{activeData.measure.uplift}</p>
+                    <div className="space-y-3">
                       {activeData.measure.metrics.map((metric, index) => (
                         <div key={index} className="flex items-center">
-                          <div className="w-8 mr-3 text-center">
-                            <Icon name={metric.icon} className="text-accent w-6 h-6" />
+                          <div className="w-6 mr-3 text-center">
+                            <Icon name={metric.icon} className="text-dbs-red w-5 h-5" />
                           </div>
-                          <p className="font-medium text-gray-700 text-sm">{metric.text}</p>
+                          <p className="font-semibold text-gray-700 text-sm">{metric.text}</p>
                         </div>
                       ))}
                     </div>
